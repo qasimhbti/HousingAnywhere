@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "grpcengine/pb";
+
+message Property {
+  int32 propertyID = 1;
+  float downpayment = 2;
+  float intratemortgage = 3;
+  float propertytaxes = 4;
+  float propertytransfertaxes = 5;
+  int32 yearstolive = 6;
+  int32 totalpropertycost = 7;
+  int32 monthlyrent = 8;
+  bool isBreakEven = 9;
+}
+
+message BreakEvenRequest {
+  Property property = 1;
+}
+
+message BreakEvenResponse {
+  Property property = 1;
+}
+
+
+service HousingAnywhereSevice {
+  rpc CalcBreakEven (stream BreakEvenRequest) returns (stream BreakEvenResponse);
+}
